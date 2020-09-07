@@ -15,66 +15,88 @@ code {
 }
 
 
-.container{
- width: 80%;
- margin: auto;
- min-height: 100vh;
+.container {
+  width: 80%;
+  margin: auto;
+  min-height: 100vh;
 }
 
-.center{
+.center {
   padding: 4%;
   display: flex;
   flex-direction: column;
   align-items: center
 }
 
-.niceFont{
+.game1 {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+  height: 80vh;
+}
+
+.game {
+  height: 80vh;
+}
+
+
+.niceFont {
   font-family: 'Architects Daughter', cursive;
 }
 
-.square{
-  margin: 1%;
+
+.cell {
+  color: white;
+  background: black;
+  margin: 0;
   padding: 0;
+  border: 1px solid red;
+
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.together {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon {
+  width: 20px;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2%;
+  background-color: white;
+  color: black;
+}
+
+.square {
+  display: flex;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+  border-radius: 2px;
   width: 70px;
   height: 70px;
 }
 
-.squareIcon{
+.squareIcon {
   margin: auto;
   padding: 0;
   width: 40px;
   height: 40px;
 }
 
-.cell{
-  color: white;
-  background: black;
-  margin: 0;
-  padding: 0;
-}
-
-.row{
-display: flex;
-flex-wrap: nowrap;
-}
-
-.together{
-  display: flex;
-  justify-content: space-around;
-}
-
-.icon{
-  width: 20px;
-}
-
-.board{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2%;
-}
-
-.logo{
+.logo {
   width: 150px;
   height: 150px;
 }
