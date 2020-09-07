@@ -59,12 +59,15 @@ class Board extends React.Component {
 		const winner = calculateWinner(this.state.squares);
 		let status;
 		if (winner === 'X') {
-			status = this.state.namePlayerOne + '  Wins! with X';
+			status = this.state.namePlayerOne + '  Wins! with ';
 			return (
 				<div class='game'>
 					<div class='alert alert-info' role='alert'>
 						<div class='center'>
-							<h1 class='niceFont'>{status}</h1>
+							<h1 class='niceFont'>
+								{status}
+								<img class='icon' src={img_X} alt='' />
+							</h1>
 						</div>
 						<div class='together'>
 							<button class='btn btn-dark niceFont' onClick={() => this.handleNew()}>
@@ -78,12 +81,15 @@ class Board extends React.Component {
 				</div>
 			);
 		} else if (winner === 'O') {
-			status = this.state.namePlayerTwo + ' Wins! with O';
+			status = this.state.namePlayerOne + '  Wins! with ';
 			return (
 				<div class='game'>
 					<div class='alert alert-info' role='alert'>
 						<div class='center'>
-							<h1 class='niceFont'>{status}</h1>
+							<h1 class='niceFont'>
+								{status}
+								<img class='icon' src={img_0} alt='' />
+							</h1>
 						</div>
 						<div class='together'>
 							<button class='btn btn-dark niceFont' onClick={() => this.handleNew()}>
