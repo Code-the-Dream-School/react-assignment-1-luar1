@@ -3,17 +3,21 @@ import Cell from './Cell';
 import Info from './Info';
 import img_0 from '../images/0.png';
 import img_X from '../images/1.png';
+import Header from './Header';
+import Logo from '../images/logo.png';
 
 class Board extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			squares       : Array(9).fill(null),
-			xIsNext       : true,
-			player1       : '',
-			player2       : '',
-			namePlayerOne : '',
-			namePlayerTwo : ''
+			gameStarted     : false,
+			gameStartedInfo : false,
+			squares         : Array(9).fill(null),
+			xIsNext         : true,
+			player1         : '',
+			player2         : '',
+			namePlayerOne   : '',
+			namePlayerTwo   : ''
 		};
 		this.handleInfo = this.handleInfo.bind(this);
 	}
@@ -23,6 +27,16 @@ class Board extends React.Component {
 			namePlayerTwo : player2
 		});
 	}
+
+	handleStartGame = () => {
+		console.log('game has started');
+		this.setState({ gameStarted: true });
+	};
+
+	handleStartGameInfo = () => {
+		console.log('Hide Info');
+		this.setState({ gameStartedInfo: true });
+	};
 
 	handleClick(i) {
 		const squares = this.state.squares.slice();
@@ -38,17 +52,25 @@ class Board extends React.Component {
 
 	handleReset() {
 		this.setState({
-			squares : [],
+      gameStarted     : true,
+			squares : Array(9).fill(null),
 			xIsNext : true
 		});
-	}
+  }
+  
 
-	handleNew(event) {
+
+
+	handleNew(e) {
 		this.setState({
-			squares : [],
-			xIsNext : true,
-			player1 : '',
-			player2 : ''
+      gameStarted     : false,
+      gameStartedInfo : false,
+			squares         : [],
+			xIsNext         : true,
+			player1         : '',
+			player2         : '',
+			namePlayerOne   : '',
+			namePlayerTwo   : ''
 		});
 	}
 	renderSquare(i) {
@@ -61,21 +83,27 @@ class Board extends React.Component {
 		if (winner === 'X') {
 			status = this.state.namePlayerOne + '  Wins! with ';
 			return (
-				<div class='game'>
-					<div class='alert alert-info' role='alert'>
-						<div class='center'>
-							<h1 class='niceFont'>
-								{status}
-								<img class='icon' src={img_X} alt='' />
-							</h1>
-						</div>
-						<div class='together'>
-							<button class='btn btn-dark niceFont' onClick={() => this.handleNew()}>
-								New Game
-							</button>
-							<button class='btn btn-dark niceFont' onClick={() => this.handleReset()}>
-								Reset
-							</button>
+				<div className='game'>
+					<header className='center'>
+						<img src={Logo} className='logo ' alt='logo' />
+						<h1 className='niceFont'>TIC TAC TOE</h1>
+					</header>
+					<div>
+						<div className='alert alert-info' role='alert'>
+							<div className='center'>
+								<h1 className='niceFont'>
+									{status}
+									<img className='icon' src={img_X} alt='' />
+								</h1>
+							</div>
+							<div className='together'>
+								<button className='btn btn-dark niceFont' onClick={() => this.handleNew()}>
+									New Game
+								</button>
+								<button className='btn btn-dark niceFont' onClick={() => this.handleReset()}>
+									Reset
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -83,19 +111,23 @@ class Board extends React.Component {
 		} else if (winner === 'O') {
 			status = this.state.namePlayerOne + '  Wins! with ';
 			return (
-				<div class='game'>
-					<div class='alert alert-info' role='alert'>
-						<div class='center'>
-							<h1 class='niceFont'>
+				<div className='game'>
+					<header className='center'>
+						<img src={Logo} className='logo ' alt='logo' />
+						<h1 className='niceFont'>TIC TAC TOE</h1>
+					</header>
+					<div className='alert alert-info' role='alert'>
+						<div className='center'>
+							<h1 className='niceFont'>
 								{status}
-								<img class='icon' src={img_0} alt='' />
+								<img className='icon' src={img_0} alt='' />
 							</h1>
 						</div>
-						<div class='together'>
-							<button class='btn btn-dark niceFont' onClick={() => this.handleNew()}>
+						<div className='together'>
+							<button className='btn btn-dark niceFont' onClick={() => this.handleNew()}>
 								New Game
 							</button>
-							<button class='btn btn-dark niceFont' onClick={() => this.handleReset()}>
+							<button className='btn btn-dark niceFont' onClick={() => this.handleReset()}>
 								Reset
 							</button>
 						</div>
@@ -107,43 +139,58 @@ class Board extends React.Component {
 		}
 
 		return (
-			<div class='game'>
-				<Info names={this.handleInfo} />
-				<div class='together'>
-					<p class='niceFont'>
-						{this.state.namePlayerOne}
-						<img class='icon' src={img_X} alt='' />
-					</p>
-					<p class='niceFont'>
-						{this.state.namePlayerTwo}
-						<img class='icon' src={img_0} alt='' />
-					</p>
-				</div>
-				<div class='board'>
-					<div class='row'>
-						{this.renderSquare(0)}
-						{this.renderSquare(1)}
-						{this.renderSquare(2)}
+			<div className='game'>
+        	
+				<Header startGame={this.handleStartGame} />
+				{this.state.gameStarted && (
+					<div>
+						<Info names={this.handleInfo} startGameInfo={this.handleStartGameInfo} />
 					</div>
-					<div class='row'>
-						{this.renderSquare(3)}
-						{this.renderSquare(4)}
-						{this.renderSquare(5)}
+				)}
+
+				{this.state.gameStartedInfo && (
+					<div>
+            <header className='center'>
+					<img src={Logo} className='logo ' alt='logo' />
+					<h1 className='niceFont'>TIC TAC TOE</h1>
+				</header>
+						<div className='together'>
+							<p className='niceFont'>
+								<img className='icon' src={img_X} alt='' />
+								{this.state.namePlayerOne}
+							</p>
+							<p className='niceFont'>
+								<img className='icon' src={img_0} alt='' />
+								{this.state.namePlayerTwo}
+							</p>
+						</div>
+						<div className='board'>
+							<div className='row'>
+								{this.renderSquare(0)}
+								{this.renderSquare(1)}
+								{this.renderSquare(2)}
+							</div>
+							<div className='row'>
+								{this.renderSquare(3)}
+								{this.renderSquare(4)}
+								{this.renderSquare(5)}
+							</div>
+							<div className='row'>
+								{this.renderSquare(6)}
+								{this.renderSquare(7)}
+								{this.renderSquare(8)}
+							</div>
+						</div>
+						<div className='together'>
+							<button className='btn btn-dark niceFont' onClick={() => this.handleNew()}>
+								New Game
+							</button>
+							<button className='btn btn-dark niceFont' onClick={() => this.handleReset()}>
+								Reset
+							</button>
+						</div>
 					</div>
-					<div class='row'>
-						{this.renderSquare(6)}
-						{this.renderSquare(7)}
-						{this.renderSquare(8)}
-					</div>
-				</div>
-				<div class='together'>
-					<button class='btn btn-dark niceFont' onClick={() => this.handleNew()}>
-						New Game
-					</button>
-					<button class='btn btn-dark niceFont' onClick={() => this.handleReset()}>
-						Reset
-					</button>
-				</div>
+				)}
 			</div>
 		);
 	}

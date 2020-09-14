@@ -7,9 +7,9 @@ class Cell extends React.Component {
 		return (
 			<button className='square btn btn-outline-dark' onClick={() => this.props.onClick()}>
 				{this.props.value === 'X' ? (
-					<img className='icon' src={img_X} alt='' />
+					<img className='squareIcon' src={img_X} alt='' />
 				) : this.props.value === 'O' ? (
-					<img className='icon' src={img_0} alt='' />
+					<img className='squareIcon' src={img_0} alt='' />
 				) : null}
 			</button>
 		);
